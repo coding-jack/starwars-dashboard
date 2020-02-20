@@ -1,21 +1,27 @@
 <template>
   <div class="dashboard">
-    <p v-for="(film, index) in films" :key="index">{{ film.title }}</p>
+    <button v-for="(category, index) in categories" :key="index" @click="loadFilms()">{{ category }}</button>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 
 export default {
   name: 'Dashboard',
   mounted() {
-    this.$store.dispatch('loadPosts');
+    this.$store.dispatch('loadCategories');
     this.$store.dispatch('loadFilms');
   },
   computed: {
     ...mapState([
       'films',
+      'categories',
+    ]),
+  },
+  methods: {
+    ...mapActions([
+      'loadFilms',
     ]),
   },
 };

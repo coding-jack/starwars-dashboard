@@ -11,18 +11,18 @@ Vue.use(VueAxios, axios);
 
 export default new Vuex.Store({
   state: {
-    posts: [],
+    categories: [],
     films: [],
   },
 
   actions: {
-    loadPosts({ commit }) {
+    loadCategories({ commit }) {
       axios
-        .get('https://jsonplaceholder.typicode.com/posts')
+        .get('https://swapi.co/api/')
         .then((data) => {
-          console.log(data.data);
-          const posts = data.data;
-          commit('SET_POSTS', posts);
+          const categories = Object.keys(data.data);
+          console.log(categories);
+          commit('SET_CATEGORIES', categories);
         })
         .catch((error) => {
           console.log(error);
@@ -43,8 +43,8 @@ export default new Vuex.Store({
   },
 
   mutations: {
-    SET_POSTS(state, posts) {
-      state.posts = posts;
+    SET_CATEGORIES(state, categories) {
+      state.categories = categories;
     },
     SET_FILMS(state, films) {
       state.films = films;
