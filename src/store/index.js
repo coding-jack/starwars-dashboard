@@ -20,6 +20,7 @@ export default new Vuex.Store({
       axios
         .get('https://swapi.co/api/')
         .then((data) => {
+          console.log(data.data);
           const categories = Object.keys(data.data);
           console.log(categories);
           commit('SET_CATEGORIES', categories);
