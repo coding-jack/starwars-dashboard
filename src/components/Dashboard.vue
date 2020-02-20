@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard">
-    <!-- <p v-for="(post, index) in posts" :key="index">{{ post.title }}</p> -->
     <p v-for="(film, index) in films" :key="index">{{ film.title }}</p>
   </div>
 </template>
@@ -16,7 +15,6 @@ export default {
   },
   computed: {
     ...mapState([
-      'posts',
       'films',
     ]),
   },
