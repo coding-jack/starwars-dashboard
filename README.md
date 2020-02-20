@@ -1,4 +1,4 @@
-# api-dashboard
+# star-wars-info
 
 > A Vue.js project created to practice calling various apis and authentication
 

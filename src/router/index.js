@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import Dashboard from '@/components/Dashboard';
+import Home from '@/components/HomeDashboard';
 import Films from '@/pages/PageFilms';
 import People from '@/pages/PagePeople';
 import Planets from '@/pages/PagePlanets';
@@ -15,8 +15,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Dashboard',
-      component: Dashboard,
+      name: 'Home',
+      component: Home,
     },
     {
       path: '/films',
@@ -49,4 +49,5 @@ export default new Router({
       component: Vehicles,
     },
   ],
+  mode: 'history',
 });

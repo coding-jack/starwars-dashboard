@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <h1>Star Wars Info!</h1>
+    <router-link to="/">Home</router-link>
     <router-view/>
   </div>
 </template>
