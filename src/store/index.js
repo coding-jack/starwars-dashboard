@@ -20,6 +20,10 @@ export default new Vuex.Store({
     vehicles: [],
   },
 
+  getters: {
+    getPeople: state => state.people,
+  },
+
   actions: {
     loadCategories({ commit }) {
       axios

@@ -17,14 +17,13 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'Home',
-  mounted() {
-    this.$store.dispatch('loadCategories');
-  },
+
   computed: {
     ...mapState([
       'categories',
     ]),
   },
+
 };
 </script>
 

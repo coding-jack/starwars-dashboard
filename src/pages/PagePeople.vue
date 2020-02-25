@@ -2,27 +2,24 @@
   <div>
     <h1>People</h1>
     <p>Select a character below to view more info on them!</p>
-    <h2 v-for="(person, index) in people" :key="index">{{ person.name }}</h2>
+    <h2 v-for="(person, index) in getPeople" :key="index" @click="setCurrentPerson(index)">{{ person.name }}</h2>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'People',
-  mounted() {
-    this.$store.dispatch('loadPeople');
-  },
   computed: {
-    ...mapState([
-      'people',
+    ...mapGetters([
+      'getPeople',
     ]),
   },
   methods: {
-    ...mapActions([
-      'loadPeople',
-    ]),
+    setCurrentPerson(id) {
+      return this.$router.push(`/people/${id}`);
+    },
   },
 };
 </script>

@@ -7,6 +7,7 @@ import Planets from '@/pages/PagePlanets';
 import Species from '@/pages/PageSpecies';
 import Starships from '@/pages/PageStarships';
 import Vehicles from '@/pages/PageVehicles';
+import SinglePerson from '../components/SinglePerson';
 
 
 Vue.use(Router);
@@ -27,6 +28,11 @@ export default new Router({
       path: '/people',
       name: 'People',
       component: People,
+    },
+    {
+      path: '/people/:id',
+      name: 'SinglePerson',
+      component: SinglePerson,
     },
     {
       path: '/planets',
