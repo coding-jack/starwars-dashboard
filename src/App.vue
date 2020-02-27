@@ -1,8 +1,9 @@
 <template>
   <div id="app">
-    <h1>Star Wars Info!</h1>
-    <router-link to="/">Home</router-link>
-    <router-view v-if="dataLoaded"/>
+    <div class="container">
+      <h1>Star Wars Info!</h1>
+      <router-view v-if="dataLoaded"/>
+    </div>
   </div>
 </template>
 

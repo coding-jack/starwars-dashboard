@@ -22,6 +22,11 @@ export default new Vuex.Store({
 
   getters: {
     getPeople: state => state.people,
+    getPlanets: state => state.planets,
+    getFilms: state => state.films,
+    getSpecies: state => state.species,
+    getVehicles: state => state.vehicles,
+    getStarships: state => state.starships,
   },
 
   actions: {
@@ -29,7 +34,6 @@ export default new Vuex.Store({
       axios
         .get('https://swapi.co/api/')
         .then((data) => {
-          console.log(data.data);
           const categories = Object.keys(data.data);
           commit('SET_CATEGORIES', categories);
         })
