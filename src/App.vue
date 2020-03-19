@@ -21,9 +21,9 @@ export default {
     this.loadCategories();
     this.loadFilms();
     await this.loadPeople();
-    this.loadPlanets();
-    this.loadSpecies();
-    this.loadStarships();
+    await this.loadPlanets();
+    await this.loadSpecies();
+    await this.loadStarships();
     await this.loadVehicles();
     this.dataLoaded = true;
   },

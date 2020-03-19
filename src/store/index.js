@@ -84,52 +84,108 @@ export default new Vuex.Store({
         .catch(error => console.log(error));
     },
     loadPlanets({ commit }) {
-      axios
-        .get('https://swapi.co/api/planets/')
-        .then((data) => {
-          const planets = data.data.results;
+      let planets = [];
+
+      axios('https://swapi.co/api/planets/')
+        .then((response) => {
+          // collect people from first page
+          planets = response.data.results;
+          return response.data.count;
+        })
+        .then((count) => {
+          // exclude the first request
+          const numberOfPagesLeft = Math.ceil((count - 1) / 10);
+          const promises = [];
+          // start at 2 as you already queried the first page
+          for (let i = 2; i <= numberOfPagesLeft; i += 1) {
+            promises.push(axios(`https://swapi.co/api/planets?page=${i}`));
+          }
+          return Promise.all(promises);
+        })
+        .then((response) => {
+          // get the rest records - pages 2 through n.
+          planets = response.reduce((acc, data) => [...acc, ...data.data.results], planets);
           commit('SET_PLANETS', planets);
         })
-        .catch((error) => {
-          console.log(error);
-          this.errored = true;
-        });
+        .catch(error => console.log(error));
     },
     loadSpecies({ commit }) {
-      axios
-        .get('https://swapi.co/api/species/')
-        .then((data) => {
-          const species = data.data.results;
+      let species = [];
+
+      axios('https://swapi.co/api/species/')
+        .then((response) => {
+          // collect people from first page
+          species = response.data.results;
+          return response.data.count;
+        })
+        .then((count) => {
+          // exclude the first request
+          const numberOfPagesLeft = Math.ceil((count - 1) / 10);
+          const promises = [];
+          // start at 2 as you already queried the first page
+          for (let i = 2; i <= numberOfPagesLeft; i += 1) {
+            promises.push(axios(`https://swapi.co/api/species?page=${i}`));
+          }
+          return Promise.all(promises);
+        })
+        .then((response) => {
+          // get the rest records - pages 2 through n.
+          species = response.reduce((acc, data) => [...acc, ...data.data.results], species);
           commit('SET_SPECIES', species);
         })
-        .catch((error) => {
-          console.log(error);
-          this.errored = true;
-        });
+        .catch(error => console.log(error));
     },
     loadStarships({ commit }) {
-      axios
-        .get('https://swapi.co/api/starships/')
-        .then((data) => {
-          const starships = data.data.results;
+      let starships = [];
+
+      axios('https://swapi.co/api/starships/')
+        .then((response) => {
+          // collect people from first page
+          starships = response.data.results;
+          return response.data.count;
+        })
+        .then((count) => {
+          // exclude the first request
+          const numberOfPagesLeft = Math.ceil((count - 1) / 10);
+          const promises = [];
+          // start at 2 as you already queried the first page
+          for (let i = 2; i <= numberOfPagesLeft; i += 1) {
+            promises.push(axios(`https://swapi.co/api/starships?page=${i}`));
+          }
+          return Promise.all(promises);
+        })
+        .then((response) => {
+          // get the rest records - pages 2 through n.
+          starships = response.reduce((acc, data) => [...acc, ...data.data.results], starships);
           commit('SET_STARSHIPS', starships);
         })
-        .catch((error) => {
-          console.log(error);
-          this.errored = true;
-        });
+        .catch(error => console.log(error));
     },
     loadVehicles({ commit }) {
-      axios
-        .get('https://swapi.co/api/vehicles/')
-        .then((data) => {
-          const vehicles = data.data.results;
+      let vehicles = [];
+
+      axios('https://swapi.co/api/vehicles/')
+        .then((response) => {
+          // collect people from first page
+          vehicles = response.data.results;
+          return response.data.count;
+        })
+        .then((count) => {
+          // exclude the first request
+          const numberOfPagesLeft = Math.ceil((count - 1) / 10);
+          const promises = [];
+          // start at 2 as you already queried the first page
+          for (let i = 2; i <= numberOfPagesLeft; i += 1) {
+            promises.push(axios(`https://swapi.co/api/vehicles?page=${i}`));
+          }
+          return Promise.all(promises);
+        })
+        .then((response) => {
+          // get the rest records - pages 2 through n.
+          vehicles = response.reduce((acc, data) => [...acc, ...data.data.results], vehicles);
           commit('SET_VEHICLES', vehicles);
         })
-        .catch((error) => {
-          console.log(error);
-          this.errored = true;
-        });
+        .catch(error => console.log(error));
     },
   },
 
