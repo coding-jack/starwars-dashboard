@@ -7,7 +7,7 @@
     <h4>Characters:</h4>
     <ul>
       <li v-for="(character, index) in getFilm.characters" :key="index">
-        <p>{{ character }}</p>
+        <router-link :to="`/people/${getPersonId(character) }`">{{ getPeople[getPersonId(character)].name }}</router-link>
       </li>
     </ul>
     <h4>Planets:</h4>
@@ -28,15 +28,23 @@ export default {
   computed: {
     ...mapGetters([
       'getFilms',
+      'getPeople',
     ]),
     getFilm() {
       return this.getFilms[this.$route.params.id];
     },
   },
+
+  methods: {
+    getPersonId(personUrl) {
+      const personId = personUrl.match(/\/people\/(\d+)\//);
+      return personId[1];
+    },
+  },
 };
 </script>
 
-<style scoped>
+<style scoped lang="scss">
 li {
   list-style: none;
 }

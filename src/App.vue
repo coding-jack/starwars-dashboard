@@ -1,8 +1,8 @@
 <template>
   <div id="app">
-    <div class="container">
+    <div class="container" v-if="dataLoaded">
       <h1>Star Wars Info!</h1>
-      <router-view v-if="dataLoaded"/>
+      <router-view/>
     </div>
   </div>
 </template>
@@ -20,7 +20,7 @@ export default {
   async mounted() {
     this.loadCategories();
     this.loadFilms();
-    this.loadPeople();
+    await this.loadPeople();
     this.loadPlanets();
     this.loadSpecies();
     this.loadStarships();

@@ -46,7 +46,10 @@ export default new Vuex.Store({
       axios
         .get('https://swapi.co/api/films/')
         .then((data) => {
-          const films = data.data.results;
+          const films = (data.data.results);
+          console.log(data);
+
+
           commit('SET_FILMS', films);
         })
         .catch((error) => {
@@ -55,16 +58,30 @@ export default new Vuex.Store({
         });
     },
     loadPeople({ commit }) {
-      axios
-        .get('https://swapi.co/api/people/')
-        .then((data) => {
-          const people = data.data.results;
+      let people = [];
+
+      axios('https://swapi.co/api/people/')
+        .then((response) => {
+          // collect people from first page
+          people = response.data.results;
+          return response.data.count;
+        })
+        .then((count) => {
+          // exclude the first request
+          const numberOfPagesLeft = Math.ceil((count - 1) / 10);
+          const promises = [];
+          // start at 2 as you already queried the first page
+          for (let i = 2; i <= numberOfPagesLeft; i += 1) {
+            promises.push(axios(`https://swapi.co/api/people?page=${i}`));
+          }
+          return Promise.all(promises);
+        })
+        .then((response) => {
+          // get the rest records - pages 2 through n.
+          people = response.reduce((acc, data) => [...acc, ...data.data.results], people);
           commit('SET_PEOPLE', people);
         })
-        .catch((error) => {
-          console.log(error);
-          this.errored = true;
-        });
+        .catch(error => console.log(error));
     },
     loadPlanets({ commit }) {
       axios
