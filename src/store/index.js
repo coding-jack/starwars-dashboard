@@ -47,9 +47,6 @@ export default new Vuex.Store({
         .get('https://swapi.co/api/films/')
         .then((data) => {
           const films = (data.data.results);
-          console.log(data);
-
-
           commit('SET_FILMS', films);
         })
         .catch((error) => {
